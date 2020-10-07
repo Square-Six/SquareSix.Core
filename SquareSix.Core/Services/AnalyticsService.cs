@@ -3,18 +3,11 @@ using System.Collections.Generic;
 using Microsoft.AppCenter;
 using Microsoft.AppCenter.Analytics;
 using Microsoft.AppCenter.Crashes;
+using SquareSix.Core.Interfaces;
 
 namespace SquareSix.Core.Services
 {
-    public interface IAnalyticsService
-    {
-        void Setup();
-        void TrackEvent(string eventName, Dictionary<string, string> extraValues = null);
-        void TrackPage(BaseViewModel viewModel);
-        void ReportException(Exception e, Dictionary<string, string> properties = null);
-    }
-
-    public class AnalyticsService
+    public class AnalyticsService : IAnalyticsService
     {
         public void Setup(string iosAppSecret, string androidAppSecret)
         {

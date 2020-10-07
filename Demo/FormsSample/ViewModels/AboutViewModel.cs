@@ -2,6 +2,7 @@
 using SquareSix.Core;
 using System.Threading.Tasks;
 using SquareSix.Core.Services;
+using SquareSix.Core.Interfaces;
 
 namespace FormsSample.ViewModels
 {
