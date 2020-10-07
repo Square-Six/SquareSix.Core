@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:vm="clr-namespace:FormsSample.ViewModels"
+    Title="Sample List"
+    x:Class="FormsSample.Views.SampleListPage">
+    <ContentPage.BindingContext>
+        <vm:SampleListViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <Grid>
+            <RefreshView Command="{Binding RefreshCommand}" IsRefreshing="{Binding IsRefreshing}">
+                <CollectionView
+                    ItemsSource="{Binding ListItems}"
+                    SelectionMode="Single"
+                    SelectedItem="{Binding SelectedItem}"
+                    RemainingItemsThresholdReachedCommand="{Binding ThresholdReachedCommand}"
+                    RemainingItemsThreshold="0">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout Orientation="Vertical" HeightRequest="300" VerticalOptions="Center">
+                                <Label Text="{Binding Name}" TextColor="Black"/>
+                                <Label Text="{Binding Email}" TextColor="Gray" FontSize="14"/>
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </RefreshView>
+            <ActivityIndicator HorizontalOptions="Center" VerticalOptions="Center" IsRunning="True" IsVisible="{Binding IsBusy}"/>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
