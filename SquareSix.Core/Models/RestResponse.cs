@@ -2,41 +2,10 @@
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using SquareSix.Core.Interfaces;
 
 namespace SquareSix.Core.Models
 {
-	/// <summary>
-	/// Container for data sent back from API
-	/// </summary>
-	public interface IRestResponse
-	{
-		/// <summary>
-		/// HTTP response status code
-		/// </summary>
-		HttpStatusCode StatusCode { get; set; }
-
-		/// <summary>
-		/// Description of HTTP status returned
-		/// </summary>
-		string Message { get; set; }
-
-		/// <summary>
-		/// Headers returned by server with the response
-		/// </summary>
-		HttpResponseHeaders ResponseHeaders { get; }
-	}
-
-	/// <summary>
-	/// Container for data sent back from API including deserialized data
-	/// </summary>
-	public interface IRestResponse<T> : IRestResponse
-	{
-		/// <summary>
-		/// Deserialized entity data
-		/// </summary>
-		T Data { get; set; }
-	}
-
 	public class RestResponse : IRestResponse
 	{
 		public HttpStatusCode StatusCode { get; set; }

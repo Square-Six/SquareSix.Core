@@ -59,13 +59,13 @@ namespace SquareSix.Core.Behaviors
                 return;
             }
 
-            EventInfo eventInfo = AssociatedObject.GetType().GetRuntimeEvent(name);
+            var eventInfo = AssociatedObject.GetType().GetRuntimeEvent(name);
             if (eventInfo == null)
             {
                 throw new ArgumentException(string.Format("EventToCommandBehavior: Can't register the '{0}' event.", EventName));
             }
 
-            MethodInfo methodInfo = typeof(EventToCommandBehavior).GetTypeInfo().GetDeclaredMethod("OnEvent");
+            var methodInfo = typeof(EventToCommandBehavior).GetTypeInfo().GetDeclaredMethod("OnEvent");
             _eventHandler = methodInfo.CreateDelegate(eventInfo.EventHandlerType, this);
             eventInfo.AddEventHandler(AssociatedObject, _eventHandler);
         }
@@ -81,11 +81,13 @@ namespace SquareSix.Core.Behaviors
             {
                 return;
             }
-            EventInfo eventInfo = AssociatedObject.GetType().GetRuntimeEvent(name);
+
+            var eventInfo = AssociatedObject.GetType().GetRuntimeEvent(name);
             if (eventInfo == null)
             {
                 throw new ArgumentException(string.Format("EventToCommandBehavior: Can't de-register the '{0}' event.", EventName));
             }
+
             eventInfo.RemoveEventHandler(AssociatedObject, _eventHandler);
             _eventHandler = null;
         }
@@ -125,8 +127,8 @@ namespace SquareSix.Core.Behaviors
                 return;
             }
 
-            string oldEventName = (string)oldValue;
-            string newEventName = (string)newValue;
+            var oldEventName = (string)oldValue;
+            var newEventName = (string)newValue;
 
             behavior.DeregisterEvent(oldEventName);
             behavior.RegisterEvent(newEventName);

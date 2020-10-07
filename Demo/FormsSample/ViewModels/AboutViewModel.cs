@@ -4,12 +4,14 @@ using Xamarin.Forms;
 using SquareSix.Core;
 using System.Threading.Tasks;
 using SquareSix.Core.Services;
+using FormsSample.Interfaces;
 
 namespace FormsSample.ViewModels
 {
     public class AboutViewModel : BaseViewModel
     {
         private readonly IAlertService _alertService;
+        private readonly IComentsService _comentsService;
 
         private AsyncCommand<string> _testAsyncCommand;
         public AsyncCommand<string> TestAsyncCommand => _testAsyncCommand ?? (_testAsyncCommand = new AsyncCommand<string>(OnTestAsync));
@@ -22,12 +24,16 @@ namespace FormsSample.ViewModels
 
             OpenWebCommand = new Command(async () => await Browser.OpenAsync("https://aka.ms/xamain-quickstart"));
 
-            _alertService = SimpleIOC.Resolve<IAlertService>();
+            _alertService = SimpleIOC.Container.Resolve<IAlertService>();
+            _comentsService = SimpleIOC.Container.Resolve<IComentsService>();
         }
 
         private async Task OnTestAsync(string value)
         {
-            await _alertService.ShowAlertAsync("Alert", "Testing Alert!");
+            //await _alertService.ShowAlertAsync("Alert", "Testing Alert!");
+
+            var res = await _comentsService.GetCommentAsync();
+            
         }
     }
 }

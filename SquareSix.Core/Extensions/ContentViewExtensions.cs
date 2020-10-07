@@ -8,8 +8,7 @@ namespace SquareSix.Core.Extensions
 {
     public static class ContentViewExtensions
     {
-        public static void AttachLifecycleToPage(this Element element, EventHandler onAppearing = null,
-            EventHandler onDisappearing = null)
+        public static void AttachLifecycleToPage(this Element element, EventHandler onAppearing = null, EventHandler onDisappearing = null)
         {
             var task = new Task(() =>
             {
@@ -29,12 +28,18 @@ namespace SquareSix.Core.Extensions
                     page.Disappearing += onDisappearing;
                 }
             });
+
             task.Start();
+
             return;
         }
+
         public static Page GetPage(this Element element, int timeout = -1)
         {
-            if (element is Page) return (Page)element;
+            if (element is Page page)
+            {
+                return page;
+            }
 
             Element el = element;
             // go up along the UI tree

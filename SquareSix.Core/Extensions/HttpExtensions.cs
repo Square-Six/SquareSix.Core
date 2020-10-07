@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Net;
 using System.Net.Http;
 using System.Text;
@@ -39,17 +40,20 @@ namespace SquareSix.Core.Extensions
         {
             HttpResponseMessage response = null;
             string content = null;
+
             try
             {
                 PrintToConsole(message);
+
                 using (response = await client.SendAsync(message, token).ConfigureAwait(false))
                 {
                     if (response.Content != null)
                     {
                         content = await response.Content.ReadAsStringAsync();
                     }
+
                     PrintToConsole(response, content);
-                    EnsurePetcoSuccessStatusCode(response);
+                    EnsureSuccessStatusCode(response);
 
                     var responseString = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
 
@@ -74,6 +78,7 @@ namespace SquareSix.Core.Extensions
         {
             HttpResponseMessage response = null;
             string content = null;
+
             try
             {
                 PrintToConsole(message);
@@ -84,8 +89,9 @@ namespace SquareSix.Core.Extensions
                     {
                         content = await response.Content.ReadAsStringAsync();
                     }
+
                     PrintToConsole(response, content);
-                    EnsurePetcoSuccessStatusCode(response);
+                    EnsureSuccessStatusCode(response);
 
                     var responseString = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
 
@@ -110,6 +116,7 @@ namespace SquareSix.Core.Extensions
         {
             HttpResponseMessage response = null;
             string content = null;
+
             try
             {
                 PrintToConsole(message);
@@ -120,9 +127,9 @@ namespace SquareSix.Core.Extensions
                     {
                         content = await response.Content.ReadAsStringAsync();
                     }
-                    PrintToConsole(response, content);
 
-                    EnsurePetcoSuccessStatusCode(response);
+                    PrintToConsole(response, content);
+                    EnsureSuccessStatusCode(response);
 
                     var resp = new RestResponse
                     {
@@ -145,17 +152,18 @@ namespace SquareSix.Core.Extensions
         {
             HttpResponseMessage response = null;
             string content = null;
+
             try
             {
                 using (response = await client.PostAsync(requestUri, dataContent).ConfigureAwait(false))
                 {
-
                     if (response.Content != null)
                     {
                         content = await response.Content.ReadAsStringAsync();
                     }
+
                     PrintToConsole(response, content);
-                    EnsurePetcoSuccessStatusCode(response);
+                    EnsureSuccessStatusCode(response);
 
                     var responseString = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
 
@@ -186,30 +194,34 @@ namespace SquareSix.Core.Extensions
 
             var serializer = new XmlSerializer(typeof(T), xRoot);
             var xDocument = XDocument.Parse(response);
+
             using (var reader = xDocument.Root.CreateReader())
             {
                 return (T)serializer.Deserialize(reader);
             }
         }
 
-        private static void EnsurePetcoSuccessStatusCode(HttpResponseMessage response)
+        private static void EnsureSuccessStatusCode(HttpResponseMessage response)
         {
-            if (response.StatusCode == HttpStatusCode.NotModified) return;
+            if (response.StatusCode == HttpStatusCode.NotModified)
+            {
+                return;
+            }
+
             response.EnsureSuccessStatusCode();
         }
 
         private static Exception HandleRestException(HttpRequestMessage request, HttpResponseMessage response, Exception e, CancellationToken token, string content)
         {
             if (TryWrapIfNetworkFailure(request, response, e, token, out NetworkException networkException))
+            {
                 return networkException;
-
-            //var nativeException = Mvx.Resolve<IHttpClientHandlerProvider>().UnwrapNativeException(request, response, e);
-
-            //if (nativeException != null)
-            //return nativeException;
+            }
 
             if (e is JsonException)
+            {
                 return new DataContractException(request, response, e as JsonException);
+            }
 
             if (e is HttpRequestException)
             {
@@ -226,7 +238,9 @@ namespace SquareSix.Core.Extensions
             }
 
             if (e is OperationCanceledException)
+            {
                 return new RequestTimeoutException(request, response, e);
+            }
 
             return new ServiceAccessException(request, response, e);
         }
@@ -236,10 +250,11 @@ namespace SquareSix.Core.Extensions
             networkException = null;
 
             if (token.IsCancellationRequested)
+            {
                 return false;
+            }
 
             var webException = e as WebException ?? e.InnerException as WebException;
-
             if (webException != null)
             {
                 networkException = new NetworkException(request, response, webException, webException.Status.ToString() ?? e.Message);
@@ -270,7 +285,7 @@ namespace SquareSix.Core.Extensions
                 sb.AppendLine($"CONTENT: {request.Content.ReadAsStringAsync().Result}");
             }
             sb.AppendLine($"HEADERS: {request.Headers}");
-            System.Diagnostics.Debug.WriteLine(sb.ToString());
+            Debug.WriteLine(sb.ToString());
 #endif
         }
 
@@ -297,7 +312,7 @@ namespace SquareSix.Core.Extensions
             }
             sb.AppendLine($"HEADERS: {response.Headers}");
             sb.AppendLine("[SAL]: Request End <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
-            System.Diagnostics.Debug.WriteLine(sb.ToString());
+            Debug.WriteLine(sb.ToString());
 #endif
         }
     }

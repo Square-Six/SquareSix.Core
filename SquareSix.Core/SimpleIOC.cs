@@ -1,62 +1,26 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Threading;
+using SquareSix.Core.Interfaces;
 
 namespace SquareSix.Core
 {
-    public static class SimpleIOC
+    public class SimpleIOC
     {
-        static readonly Dictionary<Type, Lazy<object>> services = new Dictionary<Type, Lazy<object>>();
-
-        public static void Register<T>(T service)
+        static SimpleIOC()
         {
-            services[typeof(T)] = new Lazy<object>(() => service);
         }
 
-        public static void Register<T>() where T : new()
-        {
-            services[typeof(T)] = new Lazy<object>(() => new T(), LazyThreadSafetyMode.ExecutionAndPublication);
-        }
+        static ISimpleIOC _simpleContainer;
 
-        public static void Register<T>(Func<T> function)
+        public static ISimpleIOC Container
         {
-            services[typeof(T)] = new Lazy<object>(() => function());
-        }
-
-        public static void Register(Type type, object service)
-        {
-            services[type] = new Lazy<object>(() => service);
-        }
-
-        public static void Register(Type type, Func<object> function)
-        {
-            services[type] = new Lazy<object>(function, LazyThreadSafetyMode.ExecutionAndPublication);
-        }
-
-        public static void Clear()
-        {
-            services.Clear();
-        }
-
-        public static T Resolve<T>(bool nullIsAcceptable = false) => (T)Resolve(typeof(T), nullIsAcceptable);
-
-        public static object Resolve(Type type, bool nullIsAcceptable = false)
-        {
-            //Non-scoped services
+            get
             {
-                Lazy<object> service;
-
-                if (services.TryGetValue(type, out service))
+                if (_simpleContainer == null)
                 {
-                    return service.Value;
+                    _simpleContainer = new SimpleIOCContainer();
                 }
 
-                if (nullIsAcceptable)
-                {
-                    return null;
-                }
-
-                throw new KeyNotFoundException($"Service not found for type '{type}'");
+                return _simpleContainer;
             }
         }
     }

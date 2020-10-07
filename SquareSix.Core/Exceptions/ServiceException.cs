@@ -64,6 +64,9 @@ namespace SquareSix.Core.Exceptions
 	{
 		public NetworkException(HttpRequestMessage request, HttpResponseMessage response, Exception e, string message) : base(request, response, e)
 		{ }
+
+		public NetworkException()
+		{ }
 	}
 
 	public class UnauthorizedExeption : ServiceAccessException
