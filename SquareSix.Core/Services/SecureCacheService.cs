@@ -3,24 +3,19 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Akavache;
 using System.Reactive.Linq;
+using SquareSix.Core.Interfaces;
 
 namespace SquareSix.Core.Services
 {
-    public interface ISecureCacheService
-    {
-        void Setup(string cacheName);
-        Task InsertWithKeyAsync<T>(T item, string key);
-        Task<T> GetFromKeyAsync<T>(string key);
-        Task InvalidateAsync<T>(string key);
-        Task InvalidateAllAsync();
-        Task Flush();
-        Task<IEnumerable<T>> GetAllByTypeAsync<T>();
-    }
-
     public class SecureCacheService : ISecureCacheService
     {
         public void Setup(string cacheName)
         {
+            if (string.IsNullOrEmpty(cacheName))
+            {
+                cacheName = "app-sescure-cache";
+            }
+
             Registrations.Start(cacheName);
             BlobCache.ApplicationName = cacheName;
             BlobCache.Secure.Vacuum();
