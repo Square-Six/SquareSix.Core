@@ -18,6 +18,7 @@ namespace FormsSample
 
             SimpleIOC.Container.Register<IAlertService>(new AlertService());
             SimpleIOC.Container.Register<IComentsService>(new ComentsService());
+            SimpleIOC.Container.Register<ISecureCacheService>(new SecureCacheService());
 
             MainPage = new AppShell();
         }
