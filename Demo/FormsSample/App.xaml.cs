@@ -3,6 +3,7 @@ using Xamarin.Forms;
 using FormsSample.Services;
 using SquareSix.Core;
 using SquareSix.Core.Services;
+using FormsSample.Interfaces;
 
 namespace FormsSample
 {
@@ -15,7 +16,9 @@ namespace FormsSample
 
             DependencyService.Register<MockDataStore>();
 
-            SimpleIOC.Register<IAlertService>(new AlertService());
+            SimpleIOC.Container.Register<IAlertService>(new AlertService());
+            SimpleIOC.Container.Register<IComentsService>(new ComentsService());
+            SimpleIOC.Container.Register<ISecureCacheService>(new SecureCacheService());
 
             MainPage = new AppShell();
         }

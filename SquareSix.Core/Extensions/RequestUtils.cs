@@ -12,7 +12,6 @@ namespace SquareSix.Core.Extensions
 		private static readonly JsonSerializerSettings _settings = new JsonSerializerSettings
 		{
 			ContractResolver = new CamelCasePropertyNamesContractResolver(),
-			//PreserveReferencesHandling = PreserveReferencesHandling.Objects
 		};
 
 		public static void AddJsonContent(this HttpRequestMessage message, object data)
@@ -48,12 +47,6 @@ namespace SquareSix.Core.Extensions
 			return builder;
 		}
 
-		/// <summary>
-		/// Combines a path and a relative path.
-		/// </summary>
-		/// <param name="path"></param>
-		/// <param name="relative"></param>
-		/// <returns></returns>
 		public static string Combine(string path, string relative)
 		{
 			if (relative == null)
