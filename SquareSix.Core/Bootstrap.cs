@@ -1,4 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using Newtonsoft.Json.Serialization;
 using SquareSix.Core.Interfaces;
 using SquareSix.Core.Models;
 using SquareSix.Core.Services;
@@ -42,6 +46,23 @@ namespace SquareSix.Core
                 cacheService.Setup(config?.SecureCacheName);
                 SimpleIOC.Container.Register<ISecureCacheService>(cacheService);
             }
+
+            ConfigureJson();
+        }
+
+        private static void ConfigureJson()
+        {
+            JsonConvert.DefaultSettings = new Func<JsonSerializerSettings>(() =>
+            {
+                JsonSerializerSettings settings = new JsonSerializerSettings
+                {
+                    MissingMemberHandling = MissingMemberHandling.Ignore,
+                    NullValueHandling = NullValueHandling.Ignore,
+                    ContractResolver = new CamelCasePropertyNamesContractResolver(),
+                    Converters = new List<JsonConverter> { new StringEnumConverter { NamingStrategy = new CamelCaseNamingStrategy() } },
+                };
+                return settings;
+            });
         }
     }
 }
