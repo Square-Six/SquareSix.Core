@@ -1,2 +1,2 @@
 # SquareSix.Core
-Re-usable code and helper classed between Xamarin.Forms applications.
+Re-usable code and helper classes between Xamarin.Forms applications.
