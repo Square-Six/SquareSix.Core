@@ -17,7 +17,6 @@ namespace FormsSample
 
             DependencyService.Register<MockDataStore>();
 
-            SimpleIOC.Container.Register<IAlertService>(new AlertService());
             SimpleIOC.Container.Register<IComentsService>(new ComentsService());
 
             var config = new SetupConfiguration
