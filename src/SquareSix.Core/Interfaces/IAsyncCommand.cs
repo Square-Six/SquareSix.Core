@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-namespace SquareSix.Core.Interfaces
+namespace SquareSix.Core
 {
     public interface IAsyncCommand
     {

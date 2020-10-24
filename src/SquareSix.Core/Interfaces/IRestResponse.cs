@@ -2,7 +2,7 @@
 using System.Net;
 using System.Net.Http.Headers;
 
-namespace SquareSix.Core.Interfaces
+namespace SquareSix.Core
 {
 	public interface IRestResponse
 	{

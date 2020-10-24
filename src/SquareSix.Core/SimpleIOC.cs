@@ -1,5 +1,4 @@
 ﻿using System;
-using SquareSix.Core.Interfaces;
 
 namespace SquareSix.Core
 {

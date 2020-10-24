@@ -4,7 +4,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using Newtonsoft.Json;
 
-namespace SquareSix.Core.Exceptions
+namespace SquareSix.Core
 {
 	public class ServiceAccessException : Exception
 	{

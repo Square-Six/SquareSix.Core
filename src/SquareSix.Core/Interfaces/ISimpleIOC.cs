@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SquareSix.Core.Interfaces
+namespace SquareSix.Core
 {
     public interface ISimpleIOC
     {

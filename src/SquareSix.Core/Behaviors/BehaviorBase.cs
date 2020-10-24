@@ -2,7 +2,7 @@
 using PropertyChanged;
 using Xamarin.Forms;
 
-namespace SquareSix.Core.Behaviors
+namespace SquareSix.Core
 {
     [SuppressPropertyChangedWarnings]
     public abstract class BehaviorBase<T> : Behavior<T> where T : BindableObject

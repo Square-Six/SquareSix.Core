@@ -2,9 +2,8 @@
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using SquareSix.Core.Interfaces;
 
-namespace SquareSix.Core.Models
+namespace SquareSix.Core
 {
 	public class RestResponse : IRestResponse
 	{

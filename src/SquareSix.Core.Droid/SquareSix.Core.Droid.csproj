@@ -64,7 +64,7 @@
       <Version>3.4.3</Version>
     </PackageReference>
     <PackageReference Include="akavache">
-      <Version>6.10.20</Version>
+      <Version>7.1.1</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>

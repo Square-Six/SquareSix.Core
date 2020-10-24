@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SquareSix.Core.Models
+namespace SquareSix.Core
 {
     public class SetupConfiguration
     {

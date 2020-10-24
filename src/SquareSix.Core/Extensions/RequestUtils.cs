@@ -4,7 +4,7 @@ using System.Text;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
-namespace SquareSix.Core.Extensions
+namespace SquareSix.Core
 {
 	public static class RequestUtils
 	{

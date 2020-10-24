@@ -9,10 +9,8 @@ using System.Xml.Linq;
 using System.Xml.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using SquareSix.Core.Exceptions;
-using SquareSix.Core.Models;
 
-namespace SquareSix.Core.Extensions
+namespace SquareSix.Core
 {
     public static class HttpExtensions
     {

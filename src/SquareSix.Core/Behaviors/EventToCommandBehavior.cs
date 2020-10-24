@@ -4,7 +4,7 @@ using System.Windows.Input;
 using PropertyChanged;
 using Xamarin.Forms;
 
-namespace SquareSix.Core.Behaviors
+namespace SquareSix.Core
 {
     [SuppressPropertyChangedWarnings]
     public class EventToCommandBehavior : BehaviorBase<View>
