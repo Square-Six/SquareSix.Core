@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="DemoForms.Views.AboutPage"
+    xmlns:vm="clr-namespace:DemoForms.ViewModels"
+    Title="About">
+    <ContentPage.BindingContext>
+        <vm:AboutViewModel />
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <StackLayout Orientation="Vertical" Margin="20" Spacing="20">
+                <Button Text="Sample Async" BackgroundColor="Gray" TextColor="White" Command="{Binding TestAsyncCommand}" HorizontalOptions="FillAndExpand"/>
+                <Button Text="Test Api Service" BackgroundColor="Gray" TextColor="White" Command="{Binding ApiCommand}" HorizontalOptions="FillAndExpand"/>
+            </StackLayout>
+            <CollectionView
+                SelectionMode="Single"
+                SelectedItem="{Binding SelectedItem}"
+                ItemsSource="{Binding ListItems}"
+                Grid.Row="1">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <StackLayout Orientation="Vertical" HeightRequest="44" Margin="15,5">
+                                <Label Text="{Binding Name}" TextColor="Black" VerticalTextAlignment="End"/>
+                                <Label Text="{Binding Email}" TextColor="Gray" FontSize="14" VerticalTextAlignment="Start"/>
+                            </StackLayout>
+                            <StackLayout Grid.Row="1" HeightRequest="1" BackgroundColor="LightGray" />
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

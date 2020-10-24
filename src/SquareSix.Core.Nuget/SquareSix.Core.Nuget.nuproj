@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(NuGetAuthoringPath)\NuGet.Packaging.Authoring.props" Condition="Exists('$(NuGetAuthoringPath)\NuGet.Packaging.Authoring.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{90A10190-FAFB-4570-BEE6-8E461D3F4A68}</ProjectGuid>
+    <Description>Re-usable code and helper classes between Xamarin.Forms applications.</Description>
+    <PackageId>SquareSix.Core</PackageId>
+    <PackageVersion>1.2.0</PackageVersion>
+    <Authors>Jamie Smith</Authors>
+    <DevelopmentDependency>false</DevelopmentDependency>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>SquareSix.Core.Nuget</RootNamespace>
+    <UsePartialTypes>false</UsePartialTypes>
+    <AssemblyName>SquareSix.Core.Nuget</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <Owners>SquareSix</Owners>
+    <Copyright>SquareSix 2020</Copyright>
+    <PackageTags>SquareSix</PackageTags>
+    <Title>SquareSix.Core</Title>
+    <NeutralLanguage>en</NeutralLanguage>
+    <Summary>Re-usable code and helper classes between Xamarin.Forms applications.</Summary>
+    <PackageProjectUrl>https://github.com/Square-Six/SquareSix.Core</PackageProjectUrl>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <OutputPath>bin\Debug</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="readme.txt">
+      <IncludeInPackage>true</IncludeInPackage>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="NuGet.Build.Packaging">
+      <Version>0.2.5-dev.8</Version>
+      <PrivateAssets>All</PrivateAssets>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SquareSix.Core.Droid\SquareSix.Core.Droid.csproj">
+      <Project>{D2608C43-BE0A-49EC-B48A-A7593DADA9E9}</Project>
+      <Name>SquareSix.Core.Droid</Name>
+      <SkipGetTargetFrameworkProperties></SkipGetTargetFrameworkProperties>
+      <AdditionalProperties></AdditionalProperties>
+      <ReferenceOutputAssembly>False</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\SquareSix.Core.iOS\SquareSix.Core.iOS.csproj">
+      <Project>{7359BE4C-69DE-4E31-94BB-B76099DEDDDC}</Project>
+      <Name>SquareSix.Core.iOS</Name>
+      <SkipGetTargetFrameworkProperties></SkipGetTargetFrameworkProperties>
+      <AdditionalProperties></AdditionalProperties>
+      <ReferenceOutputAssembly>False</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\SquareSix.Core\SquareSix.Core.csproj">
+      <Project>{C04A8D45-504A-4C72-AA71-2E4186C7DB76}</Project>
+      <Name>SquareSix.Core</Name>
+      <SkipGetTargetFrameworkProperties></SkipGetTargetFrameworkProperties>
+      <AdditionalProperties></AdditionalProperties>
+      <ReferenceOutputAssembly>False</ReferenceOutputAssembly>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.Common.targets" />
+  <Import Project="$(NuGetAuthoringPath)\NuGet.Packaging.Authoring.targets" Condition="Exists('$(NuGetAuthoringPath)\NuGet.Packaging.Authoring.targets')" />
+</Project>
