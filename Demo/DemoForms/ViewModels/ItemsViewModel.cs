@@ -2,15 +2,14 @@
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
-
 using Xamarin.Forms;
-
+using SquareSix.Core;
 using DemoForms.Models;
 using DemoForms.Views;
 
 namespace DemoForms.ViewModels
 {
-    public class ItemsViewModel : BaseViewModel
+    public class ItemsViewModel : SquaredListViewModel<SquaredBaseCellModel>
     {
         private Item _selectedItem;
 
@@ -19,9 +18,10 @@ namespace DemoForms.ViewModels
         public Command AddItemCommand { get; }
         public Command<Item> ItemTapped { get; }
 
+        protected override string Title => "Browse";
+
         public ItemsViewModel()
         {
-            Title = "Browse";
             Items = new ObservableCollection<Item>();
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
 
@@ -36,12 +36,12 @@ namespace DemoForms.ViewModels
 
             try
             {
-                Items.Clear();
-                var items = await DataStore.GetItemsAsync(true);
-                foreach (var item in items)
-                {
-                    Items.Add(item);
-                }
+                //Items.Clear();
+                //var items = await DataStore.GetItemsAsync(true);
+                //foreach (var item in items)
+                //{
+                //    Items.Add(item);
+                //}
             }
             catch (Exception ex)
             {
@@ -53,20 +53,12 @@ namespace DemoForms.ViewModels
             }
         }
 
-        public void OnAppearing()
+        public override Task OnAppearing()
         {
             IsBusy = true;
             SelectedItem = null;
-        }
 
-        public Item SelectedItem
-        {
-            get => _selectedItem;
-            set
-            {
-                SetProperty(ref _selectedItem, value);
-                OnItemSelected(value);
-            }
+            return Task.CompletedTask;
         }
 
         private async void OnAddItem(object obj)

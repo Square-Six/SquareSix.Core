@@ -4,10 +4,11 @@ using System.Text;
 using System.Windows.Input;
 using DemoForms.Models;
 using Xamarin.Forms;
+using SquareSix.Core;
 
 namespace DemoForms.ViewModels
 {
-    public class NewItemViewModel : BaseViewModel
+    public class NewItemViewModel : SquaredViewModel
     {
         private string text;
         private string description;
@@ -16,8 +17,6 @@ namespace DemoForms.ViewModels
         {
             SaveCommand = new Command(OnSave, ValidateSave);
             CancelCommand = new Command(OnCancel);
-            this.PropertyChanged +=
-                (_, __) => SaveCommand.ChangeCanExecute();
         }
 
         private bool ValidateSave()
@@ -26,18 +25,8 @@ namespace DemoForms.ViewModels
                 && !String.IsNullOrWhiteSpace(description);
         }
 
-        public string Text
-        {
-            get => text;
-            set => SetProperty(ref text, value);
-        }
-
-        public string Description
-        {
-            get => description;
-            set => SetProperty(ref description, value);
-        }
-
+        public string Text { get; set; }
+        public string Description { get; set; }
         public Command SaveCommand { get; }
         public Command CancelCommand { get; }
 
@@ -56,7 +45,7 @@ namespace DemoForms.ViewModels
                 Description = Description
             };
 
-            await DataStore.AddItemAsync(newItem);
+            //await DataStore.AddItemAsync(newItem);
 
             // This will pop the current page off the navigation stack
             await Shell.Current.GoToAsync("..");

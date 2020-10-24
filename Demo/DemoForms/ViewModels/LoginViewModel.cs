@@ -3,10 +3,11 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Xamarin.Forms;
+using SquareSix.Core;
 
 namespace DemoForms.ViewModels
 {
-    public class LoginViewModel : BaseViewModel
+    public class LoginViewModel : SquaredViewModel
     {
         public Command LoginCommand { get; }
 

@@ -1,30 +1,19 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Threading.Tasks;
-using DemoForms.Models;
 using Xamarin.Forms;
+using SquareSix.Core;
 
 namespace DemoForms.ViewModels
 {
     [QueryProperty(nameof(ItemId), nameof(ItemId))]
-    public class ItemDetailViewModel : BaseViewModel
+    public class ItemDetailViewModel : SquaredViewModel
     {
         private string itemId;
         private string text;
         private string description;
         public string Id { get; set; }
-
-        public string Text
-        {
-            get => text;
-            set => SetProperty(ref text, value);
-        }
-
-        public string Description
-        {
-            get => description;
-            set => SetProperty(ref description, value);
-        }
+        public string Text { get; set; }
+        public string Description { get; set; }
 
         public string ItemId
         {
@@ -43,10 +32,10 @@ namespace DemoForms.ViewModels
         {
             try
             {
-                var item = await DataStore.GetItemAsync(itemId);
-                Id = item.Id;
-                Text = item.Text;
-                Description = item.Description;
+                //var item = await DataStore.GetItemAsync(itemId);
+                //Id = item.Id;
+                //Text = item.Text;
+                //Description = item.Description;
             }
             catch (Exception)
             {

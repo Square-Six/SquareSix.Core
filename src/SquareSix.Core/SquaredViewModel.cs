@@ -7,7 +7,7 @@ namespace SquareSix.Core
     {
         public bool IsBusy { get; set; }
 
-        protected virtual string Title => string.Empty;
+        protected virtual string Title { get; set; }
 
         public SquaredViewModel()
         {

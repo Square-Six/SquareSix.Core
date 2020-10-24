@@ -2,11 +2,12 @@
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
+using SquareSix.Core.Interfaces;
 using Xamarin.Essentials;
 
 namespace SquareSix.Core
 {
-    public class SquaredRestService
+    public class SquaredRestService : ISquaredRestService
     {
         private readonly HttpClient _client;
 

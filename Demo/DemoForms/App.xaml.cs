@@ -1,8 +1,8 @@
 ﻿using System;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 using DemoForms.Services;
-using DemoForms.Views;
+using SquareSix.Core;
+using DemoForms.Interfaces;
 
 namespace DemoForms
 {
@@ -14,6 +14,13 @@ namespace DemoForms
             InitializeComponent();
 
             DependencyService.Register<MockDataStore>();
+
+            var config = new SetupConfiguration();
+            SquareSixService.Init(config);
+
+            // Register the mock data service to the iOC
+            SimpleIOC.Container.Register<IMockApiService>(new MockApiService());
+
             MainPage = new AppShell();
         }
 
