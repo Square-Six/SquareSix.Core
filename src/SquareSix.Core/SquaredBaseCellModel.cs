@@ -4,9 +4,9 @@ using System.Runtime.CompilerServices;
 
 namespace SquareSix.Core
 {
-    public abstract class BaseCellModel : INotifyPropertyChanged, IDisposable
+    public abstract class SquaredBaseCellModel : INotifyPropertyChanged, IDisposable
     {
-        public BaseCellModel()
+        public SquaredBaseCellModel()
         {
         }
 
