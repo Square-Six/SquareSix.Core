@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:vm="clr-namespace:Demo.Forms.ViewModels"
+    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+    ios:Page.UseSafeArea="true"
+    Title="{Binding Title}"
+    x:Class="Demo.Forms.Views.SamplePage">
+    <ContentPage.BindingContext>
+        <vm:SampleViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <Grid RowSpacing="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Label Grid.Row="0" Text="Select an option in the list below" TextColor="Black" HorizontalOptions="Center" VerticalOptions="Center"/>
+            <CollectionView
+                VerticalScrollBarVisibility="Never"
+                SelectionMode="Single"
+                SelectedItem="{Binding SelectedItem}"
+                ItemsSource="{Binding ListItems}"
+                Grid.Row="1">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid BackgroundColor="White" HeightRequest="50">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Label Grid.Row="0" Margin="15,0,15,0" Text="{Binding Text}" TextColor="Black" VerticalOptions="Center"/>
+                            <StackLayout Grid.Row="1" HeightRequest="1" BackgroundColor="LightGray"/>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

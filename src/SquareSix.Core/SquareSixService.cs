@@ -13,7 +13,7 @@ namespace SquareSix.Core
         {
             if (config == null)
             {
-                throw new ArgumentNullException("No 'SetupConfiguration' was found when running 'SquareSix.Initialize'");
+                throw new ArgumentNullException("No 'SetupConfiguration' was found when running 'SquareSixService.Initialize'");
             }
 
             // Register for alert service
