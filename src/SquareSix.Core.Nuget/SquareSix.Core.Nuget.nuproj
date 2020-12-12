@@ -7,7 +7,7 @@
     <ProjectGuid>{90A10190-FAFB-4570-BEE6-8E461D3F4A68}</ProjectGuid>
     <Description>Re-usable code and helper classes between Xamarin.Forms applications.</Description>
     <PackageId>SquareSix.Core</PackageId>
-    <PackageVersion>1.2.2</PackageVersion>
+    <PackageVersion>1.2.4</PackageVersion>
     <Authors>Jamie Smith</Authors>
     <DevelopmentDependency>false</DevelopmentDependency>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
@@ -46,20 +46,6 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SquareSix.Core.Droid\SquareSix.Core.Droid.csproj">
-      <Project>{D2608C43-BE0A-49EC-B48A-A7593DADA9E9}</Project>
-      <Name>SquareSix.Core.Droid</Name>
-      <SkipGetTargetFrameworkProperties></SkipGetTargetFrameworkProperties>
-      <AdditionalProperties></AdditionalProperties>
-      <ReferenceOutputAssembly>False</ReferenceOutputAssembly>
-    </ProjectReference>
-    <ProjectReference Include="..\SquareSix.Core.iOS\SquareSix.Core.iOS.csproj">
-      <Project>{7359BE4C-69DE-4E31-94BB-B76099DEDDDC}</Project>
-      <Name>SquareSix.Core.iOS</Name>
-      <SkipGetTargetFrameworkProperties></SkipGetTargetFrameworkProperties>
-      <AdditionalProperties></AdditionalProperties>
-      <ReferenceOutputAssembly>False</ReferenceOutputAssembly>
-    </ProjectReference>
     <ProjectReference Include="..\SquareSix.Core\SquareSix.Core.csproj">
       <Project>{C04A8D45-504A-4C72-AA71-2E4186C7DB76}</Project>
       <Name>SquareSix.Core</Name>

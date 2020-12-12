@@ -11,13 +11,7 @@ namespace Demo.Forms
         {
             InitializeComponent();
 
-            var configuration = new SetupConfiguration
-            {
-                iOSAppCenterSecret = "<Your iOS AppCenter Secret>",
-                AndroidAppCenterSecret = "<Your Android AppCenter Secret>",
-                SecureCacheName = "<Your secure cache name>"
-            };
-            SquareSixService.Init(configuration);
+            SquareSixService.Init();
 
             MainPage = new AppShell();
         }
