@@ -8,6 +8,11 @@ namespace SquareSix.Core
     {
         static readonly Dictionary<Type, Lazy<object>> services = new Dictionary<Type, Lazy<object>>();
 
+        public bool ContainsKey<T>()
+        {
+            return services.ContainsKey(typeof(T));
+        }
+
         public void Register<T>(T service)
         {
             services[typeof(T)] = new Lazy<object>(() => service);

@@ -8,7 +8,7 @@ using SquareSix.Core;
 
 namespace Demo.Forms.ViewModels
 {
-    public class PagingVIewModel : SquaredListViewModel<string>
+    public class PagingVIewModel : BaseListViewModel<string>
     {
         public override string Title => "Paging Sample";
 
@@ -17,12 +17,10 @@ namespace Demo.Forms.ViewModels
             ListItems = new ObservableCollection<string>();
         }
 
-        public override async Task OnAppearing()
+        public override async Task InitAsync()
         {
             var items = await GetMoreItemsAsync();
             ListItems = new ObservableCollection<string>(items);
-
-            await base.OnAppearing();
         }
 
         protected override async Task OnGetNextPageAsync()
@@ -41,7 +39,7 @@ namespace Demo.Forms.ViewModels
             await base.OnGetNextPageAsync();
         }
 
-        private async Task<List<string>> GetMoreItemsAsync()
+        private Task<List<string>> GetMoreItemsAsync()
         {
             var items = new List<string>();
             var itemCount = ListItems.Count;
@@ -51,7 +49,7 @@ namespace Demo.Forms.ViewModels
                 items.Add($"Item {x + itemCount}");
             }
 
-            return items;
+            return Task.FromResult(items);
         }
     }
 }

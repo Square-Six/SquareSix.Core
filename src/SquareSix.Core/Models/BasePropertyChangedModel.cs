@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace SquareSix.Core.Models
+namespace SquareSix.Core
 {
     public abstract class BasePropertyChangedModel : INotifyPropertyChanged, IDisposable
     {

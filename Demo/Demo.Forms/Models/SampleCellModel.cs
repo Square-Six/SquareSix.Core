@@ -1,18 +1,18 @@
 ﻿using System;
-using Demo.Forms.Enums;
-using SquareSix.Core.Models;
+using System.Threading.Tasks;
+using SquareSix.Core;
 
 namespace Demo.Forms.Models
 {
     public class SampleCellModel : BasePropertyChangedModel
     {
         public string Text { get; private set; }
-        public SampleType SampleType { get; private set; }
+        public Func<Task> OnCellTappedTask { get; private set; }
 
-        public SampleCellModel(string text, SampleType type)
+        public SampleCellModel(string text, Func<Task> onCellTappedTask)
         {
             Text = text;
-            SampleType = type;
+            OnCellTappedTask = onCellTappedTask;
         }
     }
 }

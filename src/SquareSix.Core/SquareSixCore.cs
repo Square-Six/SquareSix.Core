@@ -3,23 +3,22 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
-using SquareSix.Core.Interfaces;
 
 namespace SquareSix.Core
 {
-    public static class SquareSixService
+    public static class SquareSixCore
     {
         public static void Init()
         {
             // Register for alert service
-            SimpleIOC.Container.Register<ISquaredAlertService>(new AlertService());
+            SimpleIOC.Container.Register<IAlertService>(new AlertService());
 
             // Register for Rest Services
-            SimpleIOC.Container.Register<ISquaredRestService>(new SquaredRestService());
+            SimpleIOC.Container.Register<IRestService>(new RestService());
 
             // Configure Json serialization
             ConfigureJson();
-        }
+        }                                                                                                                                                        
 
         private static void ConfigureJson()
         {
