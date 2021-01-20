@@ -4,6 +4,7 @@ namespace SquareSix.Core
 {
     public interface ISimpleIOC
     {
+        bool ContainsKey<T>();
         void Register<T>(T service);
         void Register<T>() where T : new();
         void Register<T>(Func<T> function);

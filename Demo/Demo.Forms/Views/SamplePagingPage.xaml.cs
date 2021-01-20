@@ -17,7 +17,7 @@ namespace Demo.Forms.Views
 
             if (BindingContext is PagingVIewModel vm)
             {
-                _ = vm.OnAppearing();
+                _ = vm.InitAsync();
             }
         }
     }

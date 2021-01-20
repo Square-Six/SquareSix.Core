@@ -17,7 +17,7 @@ namespace Demo.Forms.Views
 
             if (BindingContext is SampleViewModel vm)
             {
-                _ = vm.OnAppearing();
+                _ = vm.InitAsync();
             }
         }
     }

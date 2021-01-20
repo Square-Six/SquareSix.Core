@@ -4,10 +4,11 @@ using Xamarin.Forms;
 
 namespace SquareSix.Core
 {
-    public interface ISquaredAlertService
+    public interface IAlertService
     {
+        Task<bool> ShowConfirmationAsync(string message, string title = "", string okText = "OK", string cancel = "Cancel");
         Task ShowAlertAsync(string title, string message, string okText = "OK");
         Task ShowPromptAsync(string title, string message, string okText = "OK", string cancel = "Cancel", string placeholder = null, int maxLegnth = -1, Keyboard keyboard = null, string initialValue = null);
-        Task ShowActionSheetAsync(string title, string cancel, string desctruction, params string[] buttons);
+        Task<string> ShowActionSheetAsync(string title, string cancel, string desctruction, params string[] buttons);
     }
 }

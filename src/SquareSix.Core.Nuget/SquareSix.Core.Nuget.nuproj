@@ -7,7 +7,7 @@
     <ProjectGuid>{90A10190-FAFB-4570-BEE6-8E461D3F4A68}</ProjectGuid>
     <Description>Re-usable code and helper classes between Xamarin.Forms applications.</Description>
     <PackageId>SquareSix.Core</PackageId>
-    <PackageVersion>1.2.4</PackageVersion>
+    <PackageVersion>1.3.0</PackageVersion>
     <Authors>Jamie Smith</Authors>
     <DevelopmentDependency>false</DevelopmentDependency>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>

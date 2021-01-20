@@ -1,19 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 using Acr.UserDialogs;
-using Demo.Forms.Enums;
 using Demo.Forms.Models;
 using Demo.Forms.Views;
+using Newtonsoft.Json;
 using SquareSix.Core;
 using Xamarin.Forms;
 
 namespace Demo.Forms.ViewModels
 {
-    public class SampleViewModel : SquaredListViewModel<SampleCellModel>
+    public class SampleViewModel : BaseListViewModel<SampleCellModel>
     {
-        private readonly ISquaredAlertService _alertService;
+        private readonly IAlertService _alertService;
+        private readonly IRestService _restService;
 
         public override string Title => "Samples";
 
@@ -22,40 +25,62 @@ namespace Demo.Forms.ViewModels
 
         public SampleViewModel()
         {
-            _alertService = SimpleIOC.Container.Resolve<ISquaredAlertService>();
+            _alertService = SimpleIOC.Container.Resolve<IAlertService>();
+            _restService = SimpleIOC.Container.Resolve<IRestService>();
         }
 
-        public override Task OnAppearing()
+        public override Task InitAsync()
         {
             var items = new List<SampleCellModel>();
-            items.Add(new SampleCellModel("Alert Sample", SampleType.Alert));
-            items.Add(new SampleCellModel("Async Command Sample", SampleType.AsyncCommand));
-            items.Add(new SampleCellModel("Paging CollectionView Sample", SampleType.Paging));
+            items.Add(new SampleCellModel("Alert Sample", AlertSampleAsync));
+            items.Add(new SampleCellModel("Async Command Sample", AsyncCommandTestAsync));
+            items.Add(new SampleCellModel("Paging CollectionView Sample", PagingSampleAsync));
+            items.Add(new SampleCellModel("Sample Api Request", SampleAPIReuestAsync));
 
             ListItems = new ObservableCollection<SampleCellModel>(items);
 
-            return base.OnAppearing();
+            return base.InitAsync();
         }
 
         protected override async Task OnItemSelected(object item)
         {
             if (item is SampleCellModel cell)
             {
-                switch(cell.SampleType)
-                {
-                    case SampleType.Alert:
-                        await _alertService.ShowAlertAsync("Test", "This is a test alert");
-                        break;
-                    case SampleType.AsyncCommand:
-                        TestAsyncCommand?.ExecuteAsync();
-                        break;
-                    case SampleType.Paging:
-                        await Shell.Current.GoToAsync(nameof(SamplePagingPage));
-                        break;
-                }
+                cell?.OnCellTappedTask?.Invoke();
             }
 
             await base.OnItemSelected(item);
+        }
+
+        private async Task SampleAPIReuestAsync()
+        {
+            using (UserDialogs.Instance.Loading())
+            {
+                await Task.Delay(TimeSpan.FromSeconds(1));
+
+                var uriBuilder = new UriBuilder("https://5f7cf91d834b5c0016b05b2f.mockapi.io");
+                uriBuilder.AppendUrlSegment("comments");
+
+                var results = await _restService.PrepareAndSendRequest<List<CommentModel>>(HttpMethod.Get, new Uri(uriBuilder.ToString()), null, CancellationToken.None);
+                var jsonString = JsonConvert.SerializeObject(results?.Data);
+                await _alertService.ShowAlertAsync("Success", jsonString);
+            }
+        }
+
+        private Task PagingSampleAsync()
+        {
+            return Shell.Current.GoToAsync(nameof(SamplePagingPage));
+        }
+
+        private Task AsyncCommandTestAsync()
+        {
+            TestAsyncCommand?.ExecuteAsync();
+            return Task.CompletedTask;
+        }
+
+        private Task AlertSampleAsync()
+        {
+            return _alertService.ShowAlertAsync("Test", "This is a test alert");
         }
 
         private async Task RunTestCommandAsync()

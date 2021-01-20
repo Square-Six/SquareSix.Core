@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace SquareSix.Core
 {
-    public abstract class SquaredListViewModel<T> : SquaredBaseViewModel
+    public abstract class BaseListViewModel<T> : BaseViewModel
     {
         private bool _isCurrentlyPaging;
 

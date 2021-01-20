@@ -1,19 +1,18 @@
 ﻿using System;
 using System.Threading.Tasks;
-using SquareSix.Core.Models;
 
 namespace SquareSix.Core
 {
-    public abstract class SquaredBaseViewModel : BasePropertyChangedModel
+    public abstract class BaseViewModel : BasePropertyChangedModel
     {
         public bool IsBusy { get; set; }
         public virtual string Title { get; }
 
-        public SquaredBaseViewModel()
+        public BaseViewModel()
         {
         }
 
-        public virtual Task OnAppearing()
+        public virtual Task InitAsync()
         {
             return Task.CompletedTask;
         }

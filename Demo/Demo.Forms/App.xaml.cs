@@ -11,7 +11,7 @@ namespace Demo.Forms
         {
             InitializeComponent();
 
-            SquareSixService.Init();
+            SquareSixCore.Init();
 
             MainPage = new AppShell();
         }
