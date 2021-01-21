@@ -69,5 +69,5 @@ void RaiseCanExecuteChanged();
 Task<List<KeyValuePair<string, string>>> GetAuthorizationHeaders();
 ```
 
-- Implement this interface if you want to add Authorization headers to your HttpRequestMessage's. If the `addAuthHeader` argument is true when calling the `PrepareAndSendRequest`, then the `RestService` will call this implementation and try to popluate the headers for you.
+- Implement this interface, and add it to the SimpleIOC container, if you want to add Authorization headers to your HttpRequestMessage's. If the `addAuthHeader` argument is true when calling the `PrepareAndSendRequest`, then the `RestService` will call this implementation and try to popluate the headers for you.
 
