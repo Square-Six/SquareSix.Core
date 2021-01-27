@@ -5,7 +5,7 @@ SquareSix.Core - Re-usable code and helper classes between Xamarin.Forms applica
 
 ## Setup
 
-- In your App.Xaml.cs class contructor, add the following line of code.
+- In your App.Xaml.cs class, add the following line of code.
 ```
 SquareSixCore.Init();
 ```
@@ -15,8 +15,8 @@ SquareSixCore.Init();
 ```
 - SimpleIOC: A simple IOC container for services.
 - AsyncCommand: Asynchronous commands for your command bindings.
-- BaseViewModel: InitAsync method overd, Title, and IsBusy property.
-- BaseListViewModel: Handles Lists, paging, ItemSource, PullToRefresh, and Row selection etc.
+- BaseViewModel: InitAsync overide method, Title, and IsBusy property.
+- BaseListViewModel: Handles ListViews/CollectionViews, paging, ItemSource, PullToRefresh, and Row selection etc.
 - BasePropertyChangedModel: Based off of FodyWeavers and auto implements INotifyPropertyChanged on properties.
 - ContentViewExtensions: AttachLifecycleToPage (OnAppearing, OnDisappearing).
 - HttpExtensions: Used in the RestService and making http requests.
