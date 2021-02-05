@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using Acr.UserDialogs;
+using Demo.Forms.Interfaces;
 using Demo.Forms.Models;
+using Demo.Forms.Services;
 using Demo.Forms.Views;
 using Newtonsoft.Json;
 using SquareSix.Core;
@@ -33,9 +36,13 @@ namespace Demo.Forms.ViewModels
         {
             var items = new List<SampleCellModel>();
             items.Add(new SampleCellModel("Alert Sample", AlertSampleAsync));
+            items.Add(new SampleCellModel("Alert Confirmation Sample", AlertComfirnationSampleAsync));
+            items.Add(new SampleCellModel("Alert Prompt Sample", ShowAlertPromptasync));
+            items.Add(new SampleCellModel("ActionSheet example", ShowActionSheetAsync));
             items.Add(new SampleCellModel("Async Command Sample", AsyncCommandTestAsync));
             items.Add(new SampleCellModel("Paging CollectionView Sample", PagingSampleAsync));
             items.Add(new SampleCellModel("Sample Api Request", SampleAPIReuestAsync));
+            items.Add(new SampleCellModel("Simple IoC example", SimpleIocExample));
 
             ListItems = new ObservableCollection<SampleCellModel>(items);
 
@@ -83,12 +90,47 @@ namespace Demo.Forms.ViewModels
             return _alertService.ShowAlertAsync("Test", "This is a test alert");
         }
 
+        private async Task AlertComfirnationSampleAsync()
+        {
+            var result = await _alertService.ShowConfirmationAsync("Are you sure you want to hit the reb button?!", "CONFIRM");
+            if (result)
+            {
+                Debug.WriteLine("Affirmative! Hit the red button");
+            }
+        }
+
+        private async Task ShowAlertPromptasync()
+        {
+            var result = await _alertService.ShowPromptAsync("", "Enter some text");
+            Debug.WriteLine(result);
+        }
+
+        private async Task ShowActionSheetAsync()
+        {
+            var buttons = new string[] { "Button 1", "Button 2", "Button 3", "Button 4" };
+            var result = await _alertService.ShowActionSheetAsync("Super cool title", "Cancel", null, buttons);
+            if (result != "Cancel")
+            {
+                Debug.WriteLine(result);
+            }
+        }
+
         private async Task RunTestCommandAsync()
         {
             UserDialogs.Instance.ShowLoading();
             await Task.Delay(TimeSpan.FromSeconds(1));
             UserDialogs.Instance.HideLoading();
             await _alertService.ShowAlertAsync("Async Command", "The command has finished its work");
+        }
+
+        private async Task SimpleIocExample()
+        {
+            // Register Services in the IoC like this
+            SimpleIOC.Container.Register<ITestInterface>(new TestInterface());
+            // Here is how you retreive the registered services from the IoC
+            var testService = SimpleIOC.Container.Resolve<ITestInterface>();
+
+            await testService.ShowTestAlertAsync();
         }
     }
 }
