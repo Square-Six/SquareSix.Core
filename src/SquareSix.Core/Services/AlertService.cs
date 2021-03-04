@@ -16,7 +16,7 @@ namespace SquareSix.Core
             return Application.Current?.MainPage?.DisplayAlert(title, message, okText);
         }
 
-        public Task ShowPromptAsync(string title, string message, string okText = "OK", string cancel = "Cancel", string placeholder = null, int maxLegnth = -1, Keyboard keyboard = null, string initialValue = null)
+        public Task<string> ShowPromptAsync(string title, string message, string okText = "OK", string cancel = "Cancel", string placeholder = null, int maxLegnth = -1, Keyboard keyboard = null, string initialValue = null)
         {
             return Application.Current?.MainPage?.DisplayPromptAsync(title, message, okText, cancel, placeholder, maxLegnth, keyboard, initialValue);
         }
