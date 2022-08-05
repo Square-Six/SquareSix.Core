@@ -1,3 +1,7 @@
+##DEPRECATED
+
+
+
 # SquareSix.Core for Xamarin Forms
 
 SquareSix.Core - Re-usable code and helper classes between Xamarin.Forms applications. See the demo project for examples. 
